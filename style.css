@@ -1,0 +1,120 @@
+/* ===== 1. Colours and spacing: every value is set once, here ===== */
+:root {
+  --bg: #FAF7F2; --sheet: #FFFFFF; --text: #1F1B16;
+  --muted: #5A5148; --line: #E4DDD2; --accent: #9A3B1F;
+  --s1: 8px; --s2: 24px; --s3: 40px; --s4: 72px; --gutter: 24px;
+}
+
+/* ===== 2. Base: page, headings, text and links (element selectors) ===== */
+html { scroll-padding-top: 88px; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: "Inter", Arial, sans-serif; font-size: 1.0625rem; line-height: 1.6;
+}
+h1, h2, h3, h4 {
+  font-family: "Fraunces", Georgia, serif; font-weight: 600; line-height: 1.2;
+  margin: 0 0 var(--s1);
+}
+h1 { font-size: 2.75rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.25rem; }
+p { max-width: 68ch; margin: 0 0 var(--s1); }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--text); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* ===== 3. Page frame: sticky header, main column and gaps between sections ===== */
+header {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+}
+main { max-width: 960px; margin: 0 auto; padding: 0 var(--gutter) var(--s4); }
+section { padding-top: var(--s4); }
+
+/* ===== 4. Navigation bar (flexbox) ===== */
+.nav {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+  max-width: 960px; min-height: 64px; margin: 0 auto; padding: 0 var(--gutter);
+}
+.nav-brand {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font-family: "Fraunces", Georgia, serif; font-size: 1.125rem; font-weight: 600;
+  color: var(--text); text-decoration: none;
+}
+.nav-links { display: flex; gap: var(--s1); margin: 0; padding: 0; list-style: none; }
+.nav-link {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px;
+  color: var(--text); text-decoration: none;
+}
+.nav-brand:hover, .nav-link:hover { color: var(--accent); }
+
+/* ===== 5. Hero (#hero): name, one sentence, two buttons ===== */
+#hero { padding-top: var(--s3); }
+.intro { margin-top: var(--s2); font-size: 1.25rem; }
+.meta { color: var(--muted); }
+
+/* ===== 6. Buttons and button rows ===== */
+.actions { display: flex; flex-wrap: wrap; gap: var(--s1); margin-top: var(--s2); }
+.button {
+  display: inline-flex; align-items: center; min-height: 48px; padding: 0 var(--s2);
+  background: var(--accent); border: 2px solid var(--accent); border-radius: 6px;
+  color: var(--sheet); font-weight: 600; text-decoration: none;
+}
+.button:hover { background: var(--text); border-color: var(--text); color: var(--sheet); }
+.button-outline { background: transparent; color: var(--accent); }
+.button-outline:hover { background: var(--accent); border-color: var(--accent); color: var(--sheet); }
+
+/* ===== 7. Projects (#projects): section headings and flat cards (grid) ===== */
+#projects h2, #contact h2, .resume-intro h2 { margin-bottom: var(--s2); }
+.cards { display: grid; gap: var(--s2); max-width: 720px; }
+.card {
+  padding: var(--s2); background: var(--sheet);
+  border: 1px solid var(--line); border-radius: 8px;
+}
+.card-meta { color: var(--muted); font-size: 0.9375rem; }
+
+/* ===== 8. Paper resume (#resume): a white sheet, with the download link above it ===== */
+.resume-intro p { margin-bottom: 0; }
+#resume {
+  max-width: 794px; margin-top: var(--s2); padding: var(--s3);
+  background: var(--sheet); border: 1px solid var(--line); scroll-margin-top: 56px;
+}
+#resume h3 { font-size: 1.75rem; }
+#resume h4 {
+  margin: var(--s2) 0 var(--s1); padding-bottom: var(--s1);
+  border-bottom: 1px solid var(--line);
+  font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.entry { margin-bottom: var(--s2); }
+.entry p { margin-bottom: 0; }
+.entry-title { font-weight: 600; }
+
+/* ===== 9. Contact (#contact): button row ===== */
+#contact .actions { margin-top: var(--s2); }
+
+/* ===== 10. Small screens: narrower than 700px ===== */
+@media (max-width: 699px) {
+  :root { --gutter: 16px; }
+  h1 { font-size: 2.25rem; }
+  .nav-brand { font-size: 1rem; }
+  .nav-link { padding: 0 var(--s1); }
+  .actions .button { width: 100%; justify-content: center; }
+  #resume { padding: var(--s2) var(--gutter); }
+}
+
+/* ===== 11. Print: only the resume, black on white, one A4 page ===== */
+@page { size: A4; margin: 14mm; }
+@media print {
+  body { background: #FFFFFF; color: #000000; font-size: 10pt; line-height: 1.4; }
+  header, #hero, #projects, #contact, .resume-intro { display: none; }
+  main { max-width: none; padding: 0; }
+  #resume { max-width: none; margin: 0; padding: 0; border: 0; }
+  #resume h3 { font-size: 20pt; }
+  #resume h4 {
+    margin: 12pt 0 4pt; padding-bottom: 2pt;
+    border-bottom: 1px solid #000000; font-size: 10pt;
+  }
+  #resume h3, #resume h4, #resume a { color: #000000; text-decoration: none; }
+  #resume p { max-width: none; }
+  .entry { margin-bottom: 8pt; }
+}
